@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "NODE_NO_WARNINGS=1 jest"
+    "test": "jest"
   },
   "dependencies": {
     "git-http": "^0.1.1",
