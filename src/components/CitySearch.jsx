@@ -16,6 +16,12 @@ const CitySearch = ({allLocations}) => {
     setSuggestions(filteredLocations);
   }
 
+  const handleItemClicked = (event) => {
+    const value = event.target.textContent;
+    setQuery(value);
+    setShowSuggestions(false);
+  }
+
  return (
    <div id="city-search">
     <input 
