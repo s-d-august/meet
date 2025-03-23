@@ -2,9 +2,19 @@
 import React from 'react';
 
 
-const Event = () => {
+const Event = ({event}) => {
+
+  if (!event) {
+    return null; // Return null if event is undefined
+  }
+
   return (
-    <li></li>
+    <li>
+      <h2>{event.summary}</h2>
+      <p>{event.created}</p>
+      <p>{event.location}</p>
+      <button>show details</button>
+    </li>
   );
 }
 

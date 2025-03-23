@@ -1,36 +1,34 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Event from '../components/Event';
+import EventList from '../components/EventList';
 import { getEvents } from '../api';
-
+import Event from '../components/Event';
 
 describe('<Event /> component (details hidden)', () => {
+  let EventListComponent;
+  let allEvents;
 
-  let EventComponent;
-  beforeEach(() => {
-    EventComponent = render(<Event />)
-  })
-
-  test('renders event title', async () => {
-    const allEvents = await getEvents();
-    EventComponent.rerender(<Event events={allEvents} />);
-    expect(EventComponent.queryByText(allEvents[0].summary)).toBeInTheDocument();
+  beforeEach(async () => {
+    allEvents = await getEvents();
+    EventListComponent = render(<Event event={allEvents[0]} />);
   });
 
-  test('renders event start time', async () => {
-    const allEvents = await getEvents();
-    EventComponent.rerender(<Event events={allEvents} />);
-    expect(EventComponent.queryByText(allEvents[0].created)).toBeInTheDocument();
+  test('renders event title', () => {
+    const event = allEvents[0];
+    expect(EventListComponent.queryByText(event.summary)).toBeInTheDocument();
   });
 
-  test('renders event location', async () => {
-    const allEvents = await getEvents();
-    EventComponent.rerender(<Event events={allEvents} />);
-    expect(EventComponent.queryByText(allEvents[0].location)).toBeInTheDocument();
+  test('renders event start time', () => {
+    const event = allEvents[0];
+    expect(EventListComponent.queryByText(event.created)).toBeInTheDocument();
+  });
+
+  test('renders event location', () => {
+    const event = allEvents[0];
+    expect(EventListComponent.queryByText(event.location)).toBeInTheDocument();
   });
 
   test('renders event details button with the title "show details"', () => {
-    expect(EventComponent.queryByText("show details")).toBeInTheDocument();
+    expect(EventListComponent.queryByText("show details")).toBeInTheDocument();
   });
-
-})
+});
