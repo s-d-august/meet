@@ -61,6 +61,8 @@ describe('<Event /> component show detais function', () => {
     let showDetailsButton = EventComponent.queryByText("show details");
     await user.click(showDetailsButton);
     const event = allEvents[0];
+
+    //test to make sure the details section opened
     (EventComponent.queryByText(event.description)) && (EventComponent.queryByText("hide details"))
       ? console.log("show details opened properly")
       : console.log("show details didn't open properly");
