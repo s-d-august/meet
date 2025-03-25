@@ -14,13 +14,13 @@ const Event = ({ event }) => {
       <p>{event.created}</p>
       <p>{event.location}</p>
       {!showDetails ? (
-        <button onClick={handleClick(true)}>show details</button>
+        <button className="showButton" onClick={handleClick(true)}>show details</button>
       ) : (
         <div>
           <h3>About event:</h3>
           <a href={event.htmlLink}></a>
-          <p>{event.description}</p>
-          <button onClick={handleClick(false)}>hide details</button>
+          <p className="eventDescription">{event.description}</p>
+          <button className="hideButton" onClick={handleClick(false)}>hide details</button>
         </div>
       )}
     </li>

@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { getEvents } from '../api';
 import Event from '../components/Event';
-import userEvent from '@testing-library/user-event'
+import userEvent from '@testing-library/user-event';
 
 describe('<Event /> component (details hidden)', () => {
   let EventComponent;
@@ -33,7 +33,7 @@ describe('<Event /> component (details hidden)', () => {
   });
 });
 
-describe('<Event /> component show detais function', () => {
+describe('<Event /> component show details function', () => {
   let EventComponent;
   let allEvents;
 
@@ -44,32 +44,40 @@ describe('<Event /> component show detais function', () => {
 
   test('by default, event details section should be hidden', () => {
     const event = allEvents[0];
-    expect(EventComponent.queryByText(event.description)).not.toBeInTheDocument();
+    expect(document.querySelector(".eventDescription")).not.toBeInTheDocument();
   });
 
   test('shows the details section when the user clicks on the "show details" button', async () => {
     const user = userEvent.setup();
-    let showDetailsButton = EventComponent.queryByText("show details");
-    await user.click(showDetailsButton);
+    let showDetailsButton = document.querySelector(".showButton");
     const event = allEvents[0];
-    expect(EventComponent.queryByText(event.description)).toBeInTheDocument();
+    await user.click(showDetailsButton);
+    expect(document.querySelector(".eventDescription")).toBeInTheDocument();
   });
 
   test('hides the details section when the user clicks on the "hide details" button', async () => {
-    //opening details section
+    // Opening details section
     const user = userEvent.setup();
-    let showDetailsButton = EventComponent.queryByText("show details");
+    let showDetailsButton = document.querySelector(".showButton");
     await user.click(showDetailsButton);
     const event = allEvents[0];
+    console.log(event.description);
 
-    //test to make sure the details section opened
-    (EventComponent.queryByText(event.description)) && (EventComponent.queryByText("hide details"))
-      ? console.log("show details opened properly")
-      : console.log("show details didn't open properly");
+    // Test to make sure the details section opened
+    let correctOpen = null;
+    if (document.querySelector(".eventDescription")) {
+      correctOpen = true;
+      console.log("details section opened correctly");
+    } else {
+      correctOpen = false;
+      console.log("details section did not open correctly");
+    }
 
-    //closing details section
-    let hideDetailsButton = EventComponent.queryByText("hide details");
+    // Closing details section
+    let hideDetailsButton = document.querySelector(".hideButton");
     await user.click(hideDetailsButton);
-    expect(EventComponent.queryByText(event.description)).not.toBeInTheDocument();
-  })
-})
+    let descriptionText = (document.querySelector(".eventDescription"));
+    expect(descriptionText).not.toBeInTheDocument();
+    expect(correctOpen).toBe(true);
+  });
+});
