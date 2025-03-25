@@ -43,14 +43,12 @@ describe('<Event /> component show details function', () => {
   });
 
   test('by default, event details section should be hidden', () => {
-    const event = allEvents[0];
     expect(document.querySelector(".eventDescription")).not.toBeInTheDocument();
   });
 
   test('shows the details section when the user clicks on the "show details" button', async () => {
     const user = userEvent.setup();
     let showDetailsButton = document.querySelector(".showButton");
-    const event = allEvents[0];
     await user.click(showDetailsButton);
     expect(document.querySelector(".eventDescription")).toBeInTheDocument();
   });
@@ -60,8 +58,6 @@ describe('<Event /> component show details function', () => {
     const user = userEvent.setup();
     let showDetailsButton = document.querySelector(".showButton");
     await user.click(showDetailsButton);
-    const event = allEvents[0];
-    console.log(event.description);
 
     // Test to make sure the details section opened
     let correctOpen = null;
