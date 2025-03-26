@@ -16,4 +16,9 @@ describe('<NumberOfEvents /> component', () => {
     expect(numberInput).toHaveClass('number')
   })
 
+  test('default value is 32', () => {
+    const numberInput = EventNumberComponent.queryByRole('spinbutton');
+    expect(numberInput.value == 32)
+  })
+
 })
