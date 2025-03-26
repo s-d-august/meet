@@ -11,7 +11,7 @@ describe('<App /> component', () => {
     AppDOM = render(<App />).container.firstChild
   })
 
-  test('renders list of events', () => {
+  test('renders EventList', () => {
     expect(AppDOM.querySelector('#event-list')).toBeInTheDocument();
   })
 
