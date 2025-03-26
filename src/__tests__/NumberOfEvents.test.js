@@ -13,7 +13,7 @@ describe('<NumberOfEvents /> component', () => {
   test('renders text input', () => {
     const numberInput = EventNumberComponent.queryByRole('spinbutton');
     expect(numberInput).toBeInTheDocument();
-    expect(numberInput).toHaveClass('number')
+    expect(numberInput).toHaveClass('number-input')
   })
 
   test('default value is 32', () => {

@@ -3,8 +3,22 @@ import React, {useState} from 'react';
 
 const NumberOfEvents = ({}) => {
 
+  const [value, setValue] = useState(32)
+
+  const handleInputChanged = (event) => {
+    const value = event.target.value;
+    setValue(value)
+  }
+
  return (
    <div id="number-of-events">
+    <input
+    type='number'
+    className='number-input'
+    value={value}
+    onChange={handleInputChanged}
+    >
+    </input>
    </div>
  )
 }
