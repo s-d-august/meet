@@ -18,7 +18,14 @@ describe('<NumberOfEvents /> component', () => {
 
   test('default value is 32', () => {
     const numberInput = EventNumberComponent.queryByRole('spinbutton');
-    expect(numberInput.value == 32)
+    expect(numberInput.value = 32)
+  })
+
+  test('value changes according to user input', async () => {
+    const user = userEvent.setup();
+    const numberInput = EventNumberComponent.queryByRole('spinbutton');
+    await user.type(numberInput, '{backspace}{backspace}10');
+    expect(numberInput.value = 10)
   })
 
 })
