@@ -11,7 +11,7 @@ describe('<NumberOfEvents /> component', () => {
   })
 
   test('renders text input', () => {
-    const numberInput = EventNumberComponent.queryByRole('textbox');
+    const numberInput = EventNumberComponent.queryByRole('spinbutton');
     expect(numberInput).toBeInTheDocument();
     expect(numberInput).toHaveClass('number')
   })
