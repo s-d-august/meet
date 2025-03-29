@@ -9,7 +9,7 @@ describe('<CitySearch /> component', () => {
 
   let CitySearchComponent;
   beforeEach(() => {
-    CitySearchComponent = render(<CitySearch />);
+    CitySearchComponent = render(<CitySearch allLocations={[]} />);
   })
 
   test('renders text input', () => {
