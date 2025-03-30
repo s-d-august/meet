@@ -73,6 +73,25 @@ describe('<CitySearch /> component', () => {
     expect(cityTextBox).toHaveValue(BerlinGermanySuggestion.textContent);
   })
 
+  test('returns "See all cities" when user types something that doesnt match', async () => {
+    const user = userEvent.setup();
+    const allEvents = await getEvents();
+    const allLocations = extractLocations(allEvents);
+    CitySearchComponent.rerender(<CitySearch
+      allLocations={allLocations}
+      setCurrentCity={() => { }} />)
+
+    // User types "Paris" in city textbox (there are no events in Paris)
+    const cityTextBox = CitySearchComponent.queryByRole('textbox');
+    await user.type(cityTextBox, "Paris");
+
+    // There should be one list item that reads "See all cities"
+    const suggestionListItems = CitySearchComponent.queryAllByRole('listitem');
+    expect(suggestionListItems).toHaveLength(1);
+    expect(suggestionListItems[0].textContent).toBe("See all cities");
+
+  })
+
 })
 
 describe('<CitySearch /> integration', () => {
