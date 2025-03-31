@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 import NumberOfEvents from '../components/NumberOfEvents'
+import App from '../App';
 
 describe('<NumberOfEvents /> component', () => {
 
@@ -26,6 +27,26 @@ describe('<NumberOfEvents /> component', () => {
     const numberInput = EventNumberComponent.queryByRole('spinbutton');
     await user.type(numberInput, '{backspace}{backspace}10');
     expect(numberInput.value = 10)
+  })
+
+})
+
+describe('<NumberOfEvents /> integration tests', () => {
+
+  test('displays the correct number of events based on user input', async () => {
+    const user = userEvent.setup();
+    const AppComponent = render(<App />);
+    const AppDOM = AppComponent.container.firstChild;
+
+    console.log(AppDOM.innerHTML); // Debugging log to check the DOM
+
+    const numberInput = AppComponent.queryByRole('spinbutton');
+    expect(numberInput).toBeInTheDocument(); // Ensure the input field exists
+
+    await user.type(numberInput, '{backspace}{backspace}10');
+
+    const suggestionListItems = AppComponent.queryAllByRole('listitem');
+    expect(suggestionListItems.length).toBe(10);
   })
 
 })
