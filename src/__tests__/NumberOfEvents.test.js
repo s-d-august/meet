@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 import NumberOfEvents from '../components/NumberOfEvents'
 import App from '../App';
@@ -39,12 +39,12 @@ describe('<NumberOfEvents /> integration tests', () => {
     const AppComponent = render(<App />);
     const AppDOM = AppComponent.container.firstChild;
 
-    const numberInput = AppDOM.queryByRole('spinbutton');
+    const numberInput = within(AppDOM).queryByRole('spinbutton');
     expect(numberInput).toBeInTheDocument(); // Ensure the input field exists
 
     await user.type(numberInput, '{backspace}{backspace}10');
 
-    const suggestionListItems = AppDOM.queryAllByRole('listitem');
+    const suggestionListItems = within(AppDOM).queryAllByRole('listitem');
     expect(suggestionListItems.length).toBe(10);
   })
 
