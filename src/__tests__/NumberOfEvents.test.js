@@ -8,7 +8,8 @@ describe('<NumberOfEvents /> component', () => {
 
   let EventNumberComponent;
   beforeEach(() => {
-    EventNumberComponent = render(<NumberOfEvents />)
+    EventNumberComponent = render(<NumberOfEvents
+      setCurrentNOE={() => { }} />)
   })
 
   test('renders text input', () => {
@@ -37,8 +38,6 @@ describe('<NumberOfEvents /> integration tests', () => {
     const user = userEvent.setup();
     const AppComponent = render(<App />);
     const AppDOM = AppComponent.container.firstChild;
-
-    console.log(AppDOM.innerHTML); // Debugging log to check the DOM
 
     const numberInput = AppComponent.queryByRole('spinbutton');
     expect(numberInput).toBeInTheDocument(); // Ensure the input field exists
