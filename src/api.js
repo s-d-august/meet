@@ -21,7 +21,6 @@ export const extractLocations = (events) => {
  */
 export const getEvents = async () => {
   if (window.location.href.startsWith("http://localhost")) {
-    console.log('Using mockData')
     return mockData;
   }
 
