@@ -39,12 +39,12 @@ describe('<NumberOfEvents /> integration tests', () => {
     const AppComponent = render(<App />);
     const AppDOM = AppComponent.container.firstChild;
 
-    const numberInput = AppComponent.queryByRole('spinbutton');
+    const numberInput = AppDOM.queryByRole('spinbutton');
     expect(numberInput).toBeInTheDocument(); // Ensure the input field exists
 
     await user.type(numberInput, '{backspace}{backspace}10');
 
-    const suggestionListItems = AppComponent.queryAllByRole('listitem');
+    const suggestionListItems = AppDOM.queryAllByRole('listitem');
     expect(suggestionListItems.length).toBe(10);
   })
 
