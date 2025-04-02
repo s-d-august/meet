@@ -48,7 +48,7 @@ describe('<Event /> component show details function', () => {
 
   test('shows the details section when the user clicks on the "show details" button', async () => {
     const user = userEvent.setup();
-    let showDetailsButton = document.querySelector(".showButton");
+    let showDetailsButton = document.querySelector(".details-btn");
     await user.click(showDetailsButton);
     expect(document.querySelector(".eventDescription")).toBeInTheDocument();
   });
@@ -56,7 +56,7 @@ describe('<Event /> component show details function', () => {
   test('hides the details section when the user clicks on the "hide details" button', async () => {
     // Opening details section
     const user = userEvent.setup();
-    let showDetailsButton = document.querySelector(".showButton");
+    let showDetailsButton = document.querySelector(".details-btn");
     await user.click(showDetailsButton);
 
     // Test to make sure the details section opened
@@ -70,7 +70,7 @@ describe('<Event /> component show details function', () => {
     }
 
     // Closing details section
-    let hideDetailsButton = document.querySelector(".hideButton");
+    let hideDetailsButton = document.querySelector(".details-btn");
     await user.click(hideDetailsButton);
     let descriptionText = (document.querySelector(".eventDescription"));
     expect(descriptionText).not.toBeInTheDocument();
