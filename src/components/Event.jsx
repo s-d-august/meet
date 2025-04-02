@@ -16,9 +16,9 @@ const Event = ({ event }) => {
       {!showDetails ? (
         <button className="showButton" onClick={handleClick(true)}>show details</button>
       ) : (
-        <div>
+        <div className='details'>
           <h3>About event:</h3>
-          <a href={event.htmlLink}></a>
+          <a href={event.htmlLink}>Event Link</a>
           <p className="eventDescription">{event.description}</p>
           <button className="hideButton" onClick={handleClick(false)}>hide details</button>
         </div>
