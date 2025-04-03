@@ -27,7 +27,6 @@ defineFeature(feature, test => {
 
     when('there is an event displayed', () => {
       expect(EventListItems[0]).toBeDefined();
-      console.log(EventListItems[0])
     });
 
     then('the event details should be hidden', () => {
@@ -36,17 +35,30 @@ defineFeature(feature, test => {
     });
   });
 
-  test('User can expand an event to see details.', ({ given, when, then }) => {
-    given('there is an event displayed', () => {
+  test('User can expand an event to see details.', async ({ given, when, then }) => {
+    let EventListItems;
 
+    given('there is an event displayed', async () => {
+      AppComponent = render(<App />);
+      const AppDOM = AppComponent.container.firstChild;
+      const EventListDOM = AppDOM.querySelector('#event-list');
+
+      await waitFor(() => {
+        EventListItems = within(EventListDOM).queryAllByRole('listitem');
+        expect(EventListItems.length).toBeGreaterThan(0);
+        expect(EventListItems[0]).toBeDefined();
+      });
     });
 
-    when('user clicks the \'show details\' button', () => {
-
+    when('user clicks the \'show details\' button', async () => {
+      const showDetailsButton = EventListItems[0].querySelector('.details-btn')
+      const user = userEvent.setup();
+      await user.click(showDetailsButton)
     });
 
-    then('the event details should be displayed', () => {
-
+    then('the event details should be displayed', async () => {
+      const eventDetails = EventListItems[0].querySelector('.eventDescription');
+      expect(eventDetails).toBeInTheDocument();
     });
   });
 
