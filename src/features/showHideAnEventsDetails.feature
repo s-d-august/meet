@@ -1,7 +1,7 @@
 Feature: Show/hide event details
 
  Scenario: An event element is collapsed by default.
-  Given the app is open
+  Given the list of events is showing
   When there is an event displayed
   Then the event details should be hidden
 
