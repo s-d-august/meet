@@ -44,7 +44,6 @@ describe('filter events by city', () => {
     const suggestions = await page.$$('.city-suggestion');
     const chosenLocation = suggestions[0];
     const locationValue = await page.evaluate((el) => el.textContent, chosenLocation);
-    console.log(locationValue);
 
     // check to make sure ONLY events for the selected city are shown
     await page.click('.city-suggestion');
@@ -59,7 +58,6 @@ describe('filter events by city', () => {
 
     // Ensure there is only one location, matching the one selected
     const uniqueLocations = [...new Set(eventLocations)];
-    console.log(uniqueLocations[0])
     expect(uniqueLocations.length).toBe(1);
     expect(uniqueLocations[0] == locationValue)
   });
