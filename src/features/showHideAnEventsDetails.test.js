@@ -5,11 +5,11 @@ const feature = loadFeature('./src/features/showHideAnEventsDetails.feature')
 defineFeature(feature, test => {
 
   test('An event element is collapsed by default.', ({ given, when, then }) => {
-    given('there is at least one event displayed', () => {
+    given('the app is open', () => {
 
     });
 
-    when('the list of events is first rendered', () => {
+    when('there is an event displayed', () => {
 
     });
 
@@ -19,7 +19,7 @@ defineFeature(feature, test => {
   });
 
   test('User can expand an event to see details.', ({ given, when, then }) => {
-    given('there is at least one event displayed', () => {
+    given('there is an event displayed', () => {
 
     });
 
@@ -33,7 +33,7 @@ defineFeature(feature, test => {
   });
 
   test('User can collapse an event to hide details.', ({ given, and, when, then }) => {
-    given('there is at least one event displayed', () => {
+    given('there is an event displayed', () => {
 
     });
 
