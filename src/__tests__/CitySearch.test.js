@@ -36,7 +36,9 @@ describe('<CitySearch /> component', () => {
     const user = userEvent.setup();
     const allEvents = await getEvents();
     const allLocations = extractLocations(allEvents);
-    CitySearchComponent.rerender(<CitySearch allLocations={allLocations} />)
+    CitySearchComponent.rerender(<CitySearch
+      allLocations={allLocations}
+      setInfoAlert={() => { }} />)
 
     // User types "Berlin" in city textbox
     const cityTextBox = CitySearchComponent.queryByRole('textbox');
@@ -61,7 +63,8 @@ describe('<CitySearch /> component', () => {
     const allLocations = extractLocations(allEvents);
     CitySearchComponent.rerender(<CitySearch
       allLocations={allLocations}
-      setCurrentCity={() => { }} />)
+      setCurrentCity={() => { }}
+      setInfoAlert={() => { }} />)
 
     // User types "Berlin" in city textbox
     const cityTextBox = CitySearchComponent.queryByRole('textbox');
@@ -79,7 +82,8 @@ describe('<CitySearch /> component', () => {
     const allLocations = extractLocations(allEvents);
     CitySearchComponent.rerender(<CitySearch
       allLocations={allLocations}
-      setCurrentCity={() => { }} />)
+      setCurrentCity={() => { }}
+      setInfoAlert={() => { }} />)
 
     // User types "Paris" in city textbox (there are no events in Paris)
     const cityTextBox = CitySearchComponent.queryByRole('textbox');
