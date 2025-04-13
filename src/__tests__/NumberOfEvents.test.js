@@ -9,10 +9,11 @@ describe('<NumberOfEvents /> component', () => {
   let EventNumberComponent;
   beforeEach(() => {
     EventNumberComponent = render(<NumberOfEvents
-      setCurrentNOE={() => { }} />)
+      setCurrentNOE={() => { }}
+      setErrorAlert={() => { }} />)
   })
 
-  test('renders text input', () => {
+  test('renders number input', () => {
     const numberInput = EventNumberComponent.queryByRole('spinbutton');
     expect(numberInput).toBeInTheDocument();
     expect(numberInput).toHaveClass('number-input')
