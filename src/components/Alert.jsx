@@ -1,6 +1,6 @@
 // src/components/Alert.jsx
 
-
+import React from 'react';
 import { Component } from 'react';
 
 
