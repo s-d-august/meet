@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 
-const NumberOfEvents = ({setCurrentNOE}) => {
+const NumberOfEvents = ({setCurrentNOE, setErrorAlert}) => {
 
   const [value, setValue] = useState(32)
 
@@ -9,6 +9,14 @@ const NumberOfEvents = ({setCurrentNOE}) => {
     const value = event.target.value;
     setValue(value)
     setCurrentNOE(value)
+
+    let errorText;
+    if (!value || value < 0) {
+      errorText = "Only positive numbers are allowed"
+    } else {
+      errorText = ""
+    }
+    setErrorAlert(errorText);
   }
 
  return (
