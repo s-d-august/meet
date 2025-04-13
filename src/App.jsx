@@ -4,7 +4,7 @@ import EventList from './components/EventList';
 import CitySearch from './components/CitySearch';
 import NumberOfEvents from './components/NumberOfEvents';
 import { getEvents, extractLocations } from './api';
-import { InfoAlert } from './components/Alert';
+import { InfoAlert, ErrorAlert } from './components/Alert';
 import './App.css'
 
 const App = () => {
@@ -14,6 +14,7 @@ const App = () => {
   const [allLocations, setAllLocations] = useState([]);
   const [currentCity, setCurrentCity] = useState("See all cities");
   const [infoAlert, setInfoAlert] = useState("");
+  const [errorAlert, setErrorAlert] = useState("")
 
   const fetchData = async () => {
     const allEvents = await getEvents();
@@ -33,12 +34,15 @@ const App = () => {
       <h1>meetApp</h1>
       <div className="alerts-container">
         {infoAlert.length ? <InfoAlert text={infoAlert}/> : null}
+        {errorAlert.length ? <ErrorAlert text={errorAlert}/> : null}
       </div>
       <CitySearch 
         allLocations={allLocations} 
         setCurrentCity={setCurrentCity}
         setInfoAlert={setInfoAlert}/>
-      <NumberOfEvents setCurrentNOE={setCurrentNOE}/>
+      <NumberOfEvents 
+        setCurrentNOE={setCurrentNOE}
+        setErrorAlert={setErrorAlert}/>
       <EventList events={events}/>
     </div>
   );
