@@ -26,6 +26,7 @@ export const getEvents = async () => {
   }
 
   if (!navigator.onLine) {
+    console.log("Offline detected")
     const events = localStorage.getItem("lastEvents");
     nProgress.done();
     console.log("Events loaded")
