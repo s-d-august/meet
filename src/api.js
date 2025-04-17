@@ -32,7 +32,18 @@ export const getEvents = async () => {
     return mockData;
   }
 
-  const online = await isOnline();
+  let online
+
+  window.addEventListener('online', () => {
+    console.log('Back online!');
+    online = true
+  });
+  window.addEventListener('offline', () => {
+    console.log('Offline detected');
+    online = false
+  });
+
+  //  const online = await isOnline();
   if (!online) {
     console.log("Offline detected");
     const events = localStorage.getItem("lastEvents");
