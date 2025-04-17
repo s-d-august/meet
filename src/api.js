@@ -91,18 +91,19 @@ export const getEvents = async () => {
     const url = "https://y485oai93b.execute-api.us-east-2.amazonaws.com/dev/api/get-events" + "/" + token;
     const response = await fetch(url);
     const result = await response.json();
+    console.log(result)
     if (result) {
       nProgress.done();
       localStorage.setItem("lastEvents", JSON.stringify(result.events));
       console.log("Events cached")
       return result.events;
+    } else if (localStorage.getItem("lastEvents")) {
+      console.log("Offline. Loading events from cache.")
+      return localStorage.getItem("lastEvents");
     }
+    else console.log("Offline. No cached events found.");
 
-  } else if (localStorage.getItem("lastEvents")) {
-    console.log("Offline. Loading events from cache.")
-    return localStorage.getItem("lastEvents");
   }
-  else console.log("Offline. No cached events found.");
 };
 
 const getToken = async (code) => {
