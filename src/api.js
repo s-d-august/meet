@@ -96,7 +96,12 @@ export const getEvents = async () => {
       localStorage.setItem("lastEvents", JSON.stringify(result.events));
       console.log("Events cached")
       return result.events;
-    } else return null;
+    }
+    else if (localStorage.getItem("lastEvents")) {
+      console.log("Offline. Loading events from cache.")
+      return localStorage.getItem("lastEvents");
+    }
+    else console.log("No cached events found.");
   }
 };
 
