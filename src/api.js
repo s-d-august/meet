@@ -90,8 +90,8 @@ export const getEvents = async () => {
     removeQuery();
     const url = "https://y485oai93b.execute-api.us-east-2.amazonaws.com/dev/api/get-events" + "/" + token;
     const response = await fetch(url);
+    console.log(response)
     const result = await response.json();
-    console.log(result)
     if (result) {
       nProgress.done();
       localStorage.setItem("lastEvents", JSON.stringify(result.events));
