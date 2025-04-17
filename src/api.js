@@ -32,17 +32,17 @@ export const getEvents = async () => {
     return mockData;
   }
 
-  if (window.addEventListener('online', () => {
+  window.addEventListener('online', (event) => {
     console.log('Online!');
-  }));
+  });
 
-  if (window.addEventListener('offline', () => {
+  window.addEventListener('offline', (event) => {
     console.log('Offline detected');
     const events = localStorage.getItem("lastEvents");
     nProgress.done();
     console.log("Events loaded");
     return events ? JSON.parse(events) : console.log("No events found.");
-  }));
+  });
 
   //  const online = await isOnline();
   /* if (!online) {
