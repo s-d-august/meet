@@ -97,12 +97,12 @@ export const getEvents = async () => {
       console.log("Events cached")
       return result.events;
     }
-    else if (!result) {
-      console.log("Offline. Loading events from cache.")
-      return localStorage.getItem("lastEvents");
-    }
-    else console.log("No cached events found.");
+
+  } else if (localStorage.getItem("lastEvents")) {
+    console.log("Offline. Loading events from cache.")
+    return localStorage.getItem("lastEvents");
   }
+  else console.log("Offline. No cached events found.");
 };
 
 const getToken = async (code) => {
@@ -112,7 +112,6 @@ const getToken = async (code) => {
   );
   const { access_token } = await response.json();
   access_token && localStorage.setItem("access_token", access_token);
-
 
   return access_token;
 };
@@ -125,7 +124,13 @@ export const getAccessToken = async () => {
       `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
     );
     const result = await response.json();
-    return result;
+    if (result) {
+      console.log("Request successful.")
+      return result;
+    } else {
+      console.log("Offline detected.")
+    }
+
   };
 
   const tokenCheck = accessToken && (await checkToken(accessToken));
