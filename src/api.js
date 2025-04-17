@@ -32,25 +32,26 @@ export const getEvents = async () => {
     return mockData;
   }
 
-  let online
-
   if (window.addEventListener('online', () => {
-    console.log('Back online!');
-    online = true
+    console.log('Online!');
   }));
+
   if (window.addEventListener('offline', () => {
     console.log('Offline detected');
-    online = false
+    const events = localStorage.getItem("lastEvents");
+    nProgress.done();
+    console.log("Events loaded");
+    return events ? JSON.parse(events) : console.log("No events found.");
   }));
 
   //  const online = await isOnline();
-  if (!online) {
+  /* if (!online) {
     console.log("Offline detected");
     const events = localStorage.getItem("lastEvents");
     nProgress.done();
     console.log("Events loaded");
     return events ? JSON.parse(events) : console.log("No events found.");
-  }
+  } */
 
   const token = await getAccessToken();
 
