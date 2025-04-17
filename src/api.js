@@ -15,7 +15,7 @@ export const extractLocations = (events) => {
   return locations;
 };
 
-const isOnline = async () => {
+export const isOnline = async () => {
   try {
     const response = await fetch('https://www.google.com', { method: 'HEAD' });
     return response.ok;

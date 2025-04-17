@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import EventList from './components/EventList';
 import CitySearch from './components/CitySearch';
 import NumberOfEvents from './components/NumberOfEvents';
-import { getEvents, extractLocations } from './api';
+import { getEvents, extractLocations, isOnline } from './api';
 import { InfoAlert, ErrorAlert } from './components/Alert';
 import './App.css'
 
