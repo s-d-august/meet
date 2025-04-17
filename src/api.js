@@ -23,6 +23,22 @@ export const isOnline = async () => {
     return false;
   }
 };
+
+if (navigator.onLine) {
+  console.log('Currently online');
+} else {
+  console.log('Currently offline');
+}
+
+// Register event listeners globally
+window.addEventListener('online', () => {
+  console.log('Online!');
+});
+
+window.addEventListener('offline', () => {
+  console.log('Offline detected');
+});
+
 /**
  *
  * This function will fetch the list of all events
@@ -32,11 +48,11 @@ export const getEvents = async () => {
     return mockData;
   }
 
-  window.addEventListener('online', (event) => {
+  window.addEventListener('online', () => {
     console.log('Online!');
   });
 
-  window.addEventListener('offline', (event) => {
+  window.addEventListener('offline', () => {
     console.log('Offline detected');
     const events = localStorage.getItem("lastEvents");
     nProgress.done();
