@@ -15,7 +15,14 @@ export const extractLocations = (events) => {
   return locations;
 };
 
-
+const isOnline = async () => {
+  try {
+    const response = await fetch('https://www.google.com', { method: 'HEAD' });
+    return response.ok;
+  } catch (error) {
+    return false;
+  }
+};
 /**
  *
  * This function will fetch the list of all events
@@ -25,12 +32,13 @@ export const getEvents = async () => {
     return mockData;
   }
 
-  if (navigator.onLine == false) {
-    console.log("Offline detected")
+  const online = await isOnline();
+  if (!online) {
+    console.log("Offline detected");
     const events = localStorage.getItem("lastEvents");
     nProgress.done();
-    console.log("Events loaded")
-    return events ? JSON.parse(events) : [];
+    console.log("Events loaded");
+    return events ? JSON.parse(events) : console.log("No events found.");
   }
 
   const token = await getAccessToken();
@@ -105,9 +113,5 @@ export const getAccessToken = async () => {
     return code && getToken(code);
   }
   return accessToken;
-
-
-
-
 
 }
