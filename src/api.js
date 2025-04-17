@@ -34,14 +34,14 @@ export const getEvents = async () => {
 
   let online
 
-  window.addEventListener('online', () => {
+  if (window.addEventListener('online', () => {
     console.log('Back online!');
     online = true
-  });
-  window.addEventListener('offline', () => {
+  }));
+  if (window.addEventListener('offline', () => {
     console.log('Offline detected');
     online = false
-  });
+  }));
 
   //  const online = await isOnline();
   if (!online) {
