@@ -25,7 +25,7 @@ export const getEvents = async () => {
     return mockData;
   }
 
-  if (!navigator.onLine) {
+  if (navigator.onLine) {
     console.log("Offline detected")
     const events = localStorage.getItem("lastEvents");
     nProgress.done();
