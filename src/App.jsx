@@ -27,6 +27,11 @@ const App = () => {
   }
 
   useEffect(() => {
+    if (navigator.onLine) {
+      setWarningAlert("")
+    } else {
+      setWarningAlert("Offline. Events displayed are from cache, and may not be up to date.")
+    }
     fetchData();
   }, [currentCity, currentNOE])
 
