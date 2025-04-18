@@ -15,29 +15,6 @@ export const extractLocations = (events) => {
   return locations;
 };
 
-export const isOnline = async () => {
-  try {
-    const response = await fetch('https://www.google.com', { method: 'HEAD' });
-    return response.ok;
-  } catch (error) {
-    return false;
-  }
-};
-
-if (navigator.onLine) {
-  console.log('Currently online');
-} else {
-  console.log('Currently offline');
-}
-
-// Register event listeners globally
-window.addEventListener('online', () => {
-  console.log('Online!');
-});
-
-window.addEventListener('offline', () => {
-  console.log('Offline detected');
-});
 
 /**
  *
@@ -48,26 +25,13 @@ export const getEvents = async () => {
     return mockData;
   }
 
-  window.addEventListener('online', () => {
-    console.log('Online!');
-  });
-
-  window.addEventListener('offline', () => {
-    console.log('Offline detected');
+  if (!navigator.onLine) {
+    console.log("Offline detected")
     const events = localStorage.getItem("lastEvents");
     nProgress.done();
-    console.log("Events loaded");
-    return events ? JSON.parse(events) : console.log("No events found.");
-  });
-
-  //  const online = await isOnline();
-  /* if (!online) {
-    console.log("Offline detected");
-    const events = localStorage.getItem("lastEvents");
-    nProgress.done();
-    console.log("Events loaded");
-    return events ? JSON.parse(events) : console.log("No events found.");
-  } */
+    console.log("Events loaded")
+    return events ? JSON.parse(events) : [];
+  }
 
   const token = await getAccessToken();
 
@@ -90,19 +54,13 @@ export const getEvents = async () => {
     removeQuery();
     const url = "https://y485oai93b.execute-api.us-east-2.amazonaws.com/dev/api/get-events" + "/" + token;
     const response = await fetch(url);
-    console.log(response)
     const result = await response.json();
     if (result) {
       nProgress.done();
       localStorage.setItem("lastEvents", JSON.stringify(result.events));
       console.log("Events cached")
       return result.events;
-    } else if (localStorage.getItem("lastEvents")) {
-      console.log("Offline. Loading events from cache.")
-      return localStorage.getItem("lastEvents");
-    }
-    else console.log("Offline. No cached events found.");
-
+    } else return null;
   }
 };
 
@@ -114,6 +72,7 @@ const getToken = async (code) => {
   const { access_token } = await response.json();
   access_token && localStorage.setItem("access_token", access_token);
 
+
   return access_token;
 };
 
@@ -121,16 +80,11 @@ export const getAccessToken = async () => {
   const accessToken = localStorage.getItem('access_token');
 
   const checkToken = async (accessToken) => {
-    try {
-      const response = await fetch(
-        `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
-      );
-      const result = await response.json();
-      return result
-    } catch (error) {
-      console.log("Offline detected.")
-    }
-
+    const response = await fetch(
+      `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
+    );
+    const result = await response.json();
+    return result;
   };
 
   const tokenCheck = accessToken && (await checkToken(accessToken));
@@ -151,5 +105,9 @@ export const getAccessToken = async () => {
     return code && getToken(code);
   }
   return accessToken;
+
+
+
+
 
 }
