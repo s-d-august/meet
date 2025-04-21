@@ -57,7 +57,7 @@ const App = () => {
         <CityEventsChart 
           allLocations={allLocations} 
           events={events} />
-        </div>
+      </div>
       <EventList events={events}/>
     </div>
   );
